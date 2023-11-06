@@ -1,0 +1,12 @@
+#!/bin/bash -l
+#PBS -l nodes=4:ppn=3
+#PBS -l walltime=00:04:30
+#PBS -A llp_h_pds
+#PBS -W x=nmatchpolicy:exactnode
+#PBS -l naccesspolicy=singlejob
+
+module load GCC/6.4.0-2.28
+module load OpenMPI/2.1.2-GCC-6.4.0-2.28
+
+cd pds_k_means/kmeans-startcode
+python3 help_scripts/core_difference_multiple_nodes.py 9 12 10 mpirun ./kmeans_mpi --input input/1M_1000000x4.csv --output output/output.csv --k 3 --repetitions 100 --seed 1848586

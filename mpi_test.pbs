@@ -1,0 +1,10 @@
+#!/bin/bash -l
+#PBS -l nodes=1:ppn=36
+#PBS -l walltime=00:01:00
+#PBS -A llp_h_pds
+
+module load GCC/6.4.0-2.28
+module load OpenMPI/2.1.2-GCC-6.4.0-2.28
+
+cd pds_k_means/kmeans-startcode
+mpirun ./kmeans_mpi --input input/1M_1000000x4.csv --output output/output.csv --k 3 --repetitions 100 --seed 1848586 --threads 1

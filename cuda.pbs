@@ -1,0 +1,12 @@
+#!/bin/bash -l
+#PBS -l partition=gpu
+#PBS -l nodes=1:ppn=9:gpus=1:skylake
+#PBS -l walltime=01:30:00
+#PBS -A llp_h_pds
+
+
+module load GCC/6.4.0-2.28
+module load CUDA/10.1.105
+
+cd pds_k_means/kmeans-startcode
+python3 help_scripts/block_difference.py 36 10 ./kmeans_cuda --input input/1M_1000000x4.csv --output output/output.csv --k 3 --repetitions 150 --seed 1848586 --threads 512
